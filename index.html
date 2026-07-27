@@ -2,254 +2,244 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HypeSquad Pro - TienDay Developer</title>
-    <meta name="description" content="Công cụ đổi HypeSquad Discord chuyên nghiệp. Kiểm tra tài khoản, đánh giá rủi ro ban. By TienDay Developer.">
-    <meta name="keywords" content="hypesquad, discord, bravery, brilliance, balance, check account, ban risk, tienday">
-    <meta name="author" content="TienDay Developer">
-    <meta name="theme-color" content="#5865f2">
-    
-    <meta property="og:title" content="HypeSquad Pro - TienDay Developer">
-    <meta property="og:description" content="Đổi HypeSquad + Check tài khoản + Đánh giá rủi ro ban. Chuyên nghiệp, an toàn.">
-    <meta property="og:type" content="website">
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%235865f2' width='100' height='100' rx='22'/><text y='.72em' font-size='65' text-anchor='middle' x='50' fill='white'>⚡</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0b0e13; color: #fff;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .box {
+            background: #161b26; border: 1px solid #262d3d; border-radius: 16px;
+            padding: 30px 24px; max-width: 420px; width: 100%; text-align: center;
+        }
+        .logo { font-size: 40px; margin-bottom: 10px; }
+        h1 { font-size: 22px; margin-bottom: 4px; }
+        p { color: #8b95a7; font-size: 13px; margin-bottom: 20px; }
+        input {
+            width: 100%; padding: 14px; background: #1c2230;
+            border: 2px solid #262d3d; border-radius: 10px; color: #fff;
+            font-size: 14px; outline: none; margin-bottom: 12px;
+            font-family: monospace;
+        }
+        input:focus { border-color: #5865f2; }
+        button {
+            width: 100%; padding: 14px; border: none; border-radius: 10px;
+            font-weight: 700; font-size: 15px; cursor: pointer; color: #fff;
+            background: #5865f2; margin-bottom: 8px;
+        }
+        button:hover { background: #4752c4; }
+        button.red { background: #ef4444; }
+        button.red:hover { background: #dc2626; }
+        button:disabled { opacity: 0.5; cursor: wait; }
+        .msg {
+            padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+            display: none; margin-top: 8px;
+        }
+        .msg.ok { background: #065f46; color: #6ee7b7; display: block; }
+        .msg.err { background: #7f1d1d; color: #fca5a5; display: block; }
+        .info { font-size: 11px; color: #8b95a7; margin-top: 12px; }
+        .link { color: #5865f2; cursor: pointer; text-decoration: underline; }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
-    <!-- ========== SCREEN 1: NHẬP TOKEN ========== -->
-    <div class="screen" id="screenLogin">
-        <div class="login-container">
-            <div class="login-card">
-                <div class="login-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
-                </div>
-                <h1>HypeSquad Pro</h1>
-                <p class="login-subtitle">Nhập Token Discord để bắt đầu</p>
-                
-                <div class="input-group">
-                    <label class="input-label">🔑 Token Discord</label>
-                    <div class="input-wrapper">
-                        <input type="password" class="token-input" id="tokenInput" placeholder="Dán token Discord..." autocomplete="off">
-                        <button class="toggle-vis" id="btnToggleVis">👁️</button>
-                    </div>
-                </div>
+<!-- ========== MÀN HÌNH NHẬP TOKEN ========== -->
+<div class="box" id="loginScreen">
+    <div class="logo">⚡</div>
+    <h1>HypeSquad Pro</h1>
+    <p>Nhập Token Discord để bắt đầu</p>
+    <input type="password" id="tokenInput" placeholder="Dán token Discord vào đây..." autocomplete="off">
+    <button id="btnLogin">🔓 MỞ KHÓA</button>
+    <div class="msg" id="loginMsg"></div>
+    <p class="info">
+        <span class="link" onclick="alert('1. Mở Discord Web → F12 → Console\n2. Dán code:\n(webpackChunkdiscord_app.push([[\"\"],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()\n3. Copy token → Dán vào đây')">📖 Cách lấy token</span>
+    </p>
+</div>
 
-                <button class="btn btn-primary btn-lg" id="btnLogin">
-                    <span class="btn-text">🔓 MỞ KHÓA</span>
-                    <span class="spinner"></span>
-                </button>
-
-                <div class="result" id="loginResult"></div>
-
-                <div class="login-footer">
-                    <span class="link" id="btnGuide">📖 Cách lấy token</span>
-                    <span class="link" id="btnWhy">❓ Tại sao cần token?</span>
-                </div>
-            </div>
-
-            <p class="login-brand">By <strong>TienDay Developer</strong> · <a href="https://tienday.kdns.fr" target="_blank">tienday.kdns.fr</a></p>
-        </div>
+<!-- ========== MÀN HÌNH CHÍNH ========== -->
+<div class="box hidden" id="mainScreen">
+    <div class="logo">🏠</div>
+    <h1 id="userName">...</h1>
+    <p id="userBadge" style="color:#8b95a7">...</p>
+    
+    <div style="background:#1c2230;border-radius:10px;padding:12px;margin:12px 0;text-align:left">
+        <b>🛡️ Đánh giá rủi ro:</b> <span id="riskLabel">...</span>
     </div>
 
-    <!-- ========== SCREEN 2: DASHBOARD ========== -->
-    <div class="screen hidden" id="screenDashboard">
-        <div class="dashboard">
-            
-            <!-- Header -->
-            <header class="dash-header">
-                <div class="dash-user" id="dashUser">
-                    <img class="dash-avatar" id="dashAvatar" src="" alt="Avatar">
-                    <div>
-                        <div class="dash-username" id="dashUsername">...</div>
-                        <div class="dash-badge" id="dashBadge">Đang kiểm tra...</div>
-                    </div>
-                </div>
-                <div class="dash-actions">
-                    <button class="btn-icon" id="btnRefresh" title="Làm mới">🔄</button>
-                    <button class="btn-icon" id="btnLogout" title="Đăng xuất">🚪</button>
-                </div>
-            </header>
+    <p style="font-size:13px;font-weight:700;margin-bottom:8px">Chọn House:</p>
+    <button onclick="selectHouse(1)" id="btn1" style="background:#9c84ef">🟣 Bravery</button>
+    <button onclick="selectHouse(2)" id="btn2" style="background:#f47b67">🟠 Brilliance</button>
+    <button onclick="selectHouse(3)" id="btn3" style="background:#3ecf8e">🟢 Balance</button>
+    
+    <button id="btnJoin" style="margin-top:12px">⚡ ĐỔI HUY HIỆU</button>
+    <button class="red" id="btnLeave">🚫 Rời HypeSquad</button>
+    
+    <div class="msg" id="mainMsg"></div>
+    
+    <button class="red" id="btnLogout" style="margin-top:16px">🚪 Đăng xuất</button>
+</div>
 
-            <!-- Risk Banner -->
-            <div class="risk-banner" id="riskBanner">
-                <div class="risk-icon" id="riskIcon">🟢</div>
-                <div class="risk-info">
-                    <div class="risk-level" id="riskLevel">An toàn</div>
-                    <div class="risk-desc" id="riskDesc">Tài khoản của bạn có thể sử dụng tool an toàn</div>
-                </div>
-            </div>
+<script>
+// ========== STATE ==========
+let token = '';
+let userData = null;
+let house = null;
 
-            <!-- Tab Navigation -->
-            <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="hypesquad">🏠 Đổi HypeSquad</button>
-                <button class="tab-btn" data-tab="account">🔍 Thông tin TK</button>
-                <button class="tab-btn" data-tab="safety">🛡️ An toàn</button>
-            </nav>
+// ========== DOM ==========
+const loginScreen = document.getElementById('loginScreen');
+const mainScreen = document.getElementById('mainScreen');
+const tokenInput = document.getElementById('tokenInput');
+const loginMsg = document.getElementById('loginMsg');
+const mainMsg = document.getElementById('mainMsg');
 
-            <!-- Tab: HypeSquad -->
-            <div class="tab-content active" id="tabHypesquad">
-                <div class="card">
-                    <h3>Chọn HypeSquad House</h3>
-                    <p class="text-muted">Chọn 1 trong 3 house để đổi huy hiệu</p>
-                    
-                    <div class="house-grid" id="houseGrid">
-                        <div class="house-card bravery" data-house="1">
-                            <div class="house-check">✓</div>
-                            <div class="house-icon bravery">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2 6 14h7l-1 8 8-12h-7l1-8Z"/></svg>
-                            </div>
-                            <div class="house-name">Bravery</div>
-                            <div class="house-desc">Dũng Cảm · Tím</div>
-                        </div>
-                        <div class="house-card brilliance" data-house="2">
-                            <div class="house-check">✓</div>
-                            <div class="house-icon brilliance">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
-                            </div>
-                            <div class="house-name">Brilliance</div>
-                            <div class="house-desc">Tỏa Sáng · Cam</div>
-                        </div>
-                        <div class="house-card balance" data-house="3">
-                            <div class="house-check">✓</div>
-                            <div class="house-icon balance">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            </div>
-                            <div class="house-name">Balance</div>
-                            <div class="house-desc">Cân Bằng · Xanh</div>
-                        </div>
-                    </div>
+// ========== INIT ==========
+const saved = localStorage.getItem('hs_token');
+if (saved) { token = saved; tokenInput.value = saved; }
 
-                    <button class="btn btn-primary btn-lg" id="btnJoin">
-                        <span class="btn-text">⚡ ĐỔI HUY HIỆU NGAY</span>
-                        <span class="spinner"></span>
-                    </button>
-                    <button class="btn btn-danger" id="btnLeave">
-                        <span class="btn-text">🚫 Rời HypeSquad</span>
-                        <span class="spinner"></span>
-                    </button>
+// ========== LOGIN ==========
+document.getElementById('btnLogin').addEventListener('click', async function() {
+    const btn = this;
+    token = tokenInput.value.trim();
+    if (!token) return showMsg(loginMsg, 'err', '❌ Vui lòng nhập Token');
 
-                    <div class="result" id="hypeResult"></div>
-                </div>
-            </div>
+    btn.disabled = true;
+    btn.textContent = '⏳ Đang kiểm tra...';
+    loginMsg.className = 'msg';
 
-            <!-- Tab: Account Info -->
-            <div class="tab-content" id="tabAccount">
-                <div class="card">
-                    <h3>🔍 Thông tin tài khoản</h3>
-                    <div class="account-grid" id="accountInfo">
-                        <div class="acc-item"><span>🆔 ID</span><span id="accId">-</span></div>
-                        <div class="acc-item"><span>👤 Username</span><span id="accUsername">-</span></div>
-                        <div class="acc-item"><span>🌐 Global Name</span><span id="accGlobalName">-</span></div>
-                        <div class="acc-item"><span>📧 Email</span><span id="accEmail">-</span></div>
-                        <div class="acc-item"><span>📱 Phone</span><span id="accPhone">-</span></div>
-                        <div class="acc-item"><span>✅ Verified</span><span id="accVerified">-</span></div>
-                        <div class="acc-item"><span>💎 Nitro</span><span id="accNitro">-</span></div>
-                        <div class="acc-item"><span>🏠 HypeSquad</span><span id="accHype">-</span></div>
-                        <div class="acc-item"><span>🌍 Locale</span><span id="accLocale">-</span></div>
-                        <div class="acc-item"><span>📅 Ngày tạo</span><span id="accCreated">-</span></div>
-                        <div class="acc-item"><span>🚩 Flags</span><span id="accFlags">-</span></div>
-                        <div class="acc-item"><span>🏷️ Clan</span><span id="accClan">-</span></div>
-                    </div>
-                </div>
+    try {
+        const res = await fetch('https://discord.com/api/v9/users/@me', {
+            headers: { 'Authorization': token }
+        });
 
-                <!-- Risk Assessment -->
-                <div class="card">
-                    <h3>📊 Đánh giá rủi ro</h3>
-                    <div class="risk-detail" id="riskDetail">
-                        <div class="risk-score" id="riskScore">0</div>
-                        <div class="risk-bar">
-                            <div class="risk-fill" id="riskFill"></div>
-                        </div>
-                        <div class="risk-factors" id="riskFactors"></div>
-                    </div>
-                </div>
-            </div>
+        if (res.ok) {
+            userData = await res.json();
+            localStorage.setItem('hs_token', token);
+            showDashboard();
+        } else if (res.status === 401) {
+            showMsg(loginMsg, 'err', '❌ Token sai hoặc hết hạn');
+        } else {
+            showMsg(loginMsg, 'err', '❌ Lỗi ' + res.status);
+        }
+    } catch (e) {
+        showMsg(loginMsg, 'err', '❌ Lỗi kết nối: ' + e.message);
+    }
 
-            <!-- Tab: Safety -->
-            <div class="tab-content" id="tabSafety">
-                <div class="card">
-                    <h3>🛡️ Hướng dẫn an toàn</h3>
-                    <div class="safety-list">
-                        <div class="safety-item">✅ Token KHÔNG gửi đi đâu - 100% client-side</div>
-                        <div class="safety-item">✅ Gọi thẳng API Discord - không qua server trung gian</div>
-                        <div class="safety-item">⚠️ Không spam đổi house - tối đa 1-2 lần/ngày</div>
-                        <div class="safety-item">⚠️ Không dùng token của người khác</div>
-                        <div class="safety-item">🚫 Tuyệt đối không share token</div>
-                    </div>
-                </div>
+    btn.disabled = false;
+    btn.textContent = '🔓 MỞ KHÓA';
+});
 
-                <div class="card">
-                    <h3>📊 Mức độ rủi ro khi đổi HypeSquad</h3>
-                    <div class="risk-table">
-                        <div class="risk-row low"><span>🟢 Thấp</span><span>TK > 1 năm, có email, đổi 1 lần/ngày</span></div>
-                        <div class="risk-row medium"><span>🟡 Trung bình</span><span>TK 6-12 tháng, đổi 3-5 lần/ngày</span></div>
-                        <div class="risk-row high"><span>🟠 Cao</span><span>TK < 6 tháng, không email</span></div>
-                        <div class="risk-row critical"><span>🔴 Nghiêm trọng</span><span>TK mới, spam API, token lạ → CÓ THỂ BỊ BAN</span></div>
-                    </div>
-                </div>
+// ========== DASHBOARD ==========
+function showDashboard() {
+    loginScreen.classList.add('hidden');
+    mainScreen.classList.remove('hidden');
 
-                <div class="card">
-                    <h3>❓ FAQ</h3>
-                    <details>
-                        <summary>Có bị Discord ban không?</summary>
-                        <p>Nếu dùng đúng cách (1-2 lần/ngày, token chính chủ) → <strong>KHÔNG</strong>. Spam hoặc dùng token lạ → CÓ THỂ.</p>
-                    </details>
-                    <details>
-                        <summary>Token có bị lộ không?</summary>
-                        <p><strong>KHÔNG.</strong> Token chỉ lưu trong localStorage máy bạn, gọi thẳng API Discord.</p>
-                    </details>
-                    <details>
-                        <summary>Đổi xong bao lâu thấy huy hiệu?</summary>
-                        <p>Ngay lập tức. Refresh Discord (Ctrl+R) là thấy.</p>
-                    </details>
-                </div>
-            </div>
+    const u = userData;
+    document.getElementById('userName').textContent = u.global_name || u.username;
+    
+    // Badge
+    let badge = '';
+    if (u.premium_type === 2) badge += '💎 Nitro Full · ';
+    else if (u.premium_type === 1) badge += '💎 Nitro Classic · ';
+    if (u.flags & 256) badge += '🟣 Bravery';
+    else if (u.flags & 128) badge += '🟠 Brilliance';
+    else if (u.flags & 64) badge += '🟢 Balance';
+    else badge += 'Chưa có HypeSquad';
+    document.getElementById('userBadge').textContent = badge;
 
-            <!-- Footer -->
-            <footer class="dash-footer">
-                <p><strong>TienDay Developer</strong> · <a href="https://tienday.kdns.fr">tienday.kdns.fr</a></p>
-                <p>100% Client-side · Không theo dõi · Không lưu trữ</p>
-            </footer>
-        </div>
-    </div>
+    // Risk
+    const created = new Date(Math.floor(parseInt(u.id) / 4194304) + 1420070400000);
+    const months = (Date.now() - created.getTime()) / (1000 * 60 * 60 * 24 * 30);
+    let risk = '🟢 Thấp';
+    if (months < 3) risk = '🔴 NGUY HIỂM - TK mới';
+    else if (months < 6) risk = '🟠 Cao - TK < 6 tháng';
+    else if (!u.email) risk = '🟡 Trung bình - Chưa có email';
+    document.getElementById('riskLabel').textContent = risk;
+}
 
-    <!-- Toast -->
-    <div class="toast" id="toast"></div>
+// ========== SELECT HOUSE ==========
+function selectHouse(id) {
+    house = id;
+    document.querySelectorAll('#mainScreen button[id^="btn"]').forEach(b => {
+        if (b.id.startsWith('btn') && b.id.length === 4) b.style.opacity = '0.5';
+    });
+    document.getElementById('btn' + id).style.opacity = '1';
+}
 
-    <!-- Guide Modal -->
-    <div class="modal-overlay" id="guideModal">
-        <div class="modal">
-            <button class="modal-close" onclick="App.closeModal('guideModal')">✕</button>
-            <h3>📖 Cách lấy Token Discord</h3>
-            <div class="step"><strong>1.</strong> Mở <a href="https://discord.com/channels/@me" target="_blank">Discord Web</a> → Đăng nhập</div>
-            <div class="step"><strong>2.</strong> Nhấn <kbd>F12</kbd> → Tab <strong>Console</strong></div>
-            <div class="step"><strong>3.</strong> Dán code → Enter:</div>
-            <pre class="code-block" id="tokenCode">(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()</pre>
-            <button class="btn btn-primary btn-sm" id="btnCopyCode">📋 Copy Code</button>
-            <p style="color:#f87171;font-size:12px;margin-top:8px">⚠️ Token = Mật khẩu. Không share!</p>
-        </div>
-    </div>
+// ========== JOIN ==========
+document.getElementById('btnJoin').addEventListener('click', async function() {
+    if (!house) return showMsg(mainMsg, 'err', '❌ Chọn House trước!');
+    const btn = this;
+    btn.disabled = true; btn.textContent = '⏳ Đang đổi...';
+    mainMsg.className = 'msg';
 
-    <!-- Why Modal -->
-    <div class="modal-overlay" id="whyModal">
-        <div class="modal">
-            <button class="modal-close" onclick="App.closeModal('whyModal')">✕</button>
-            <h3>❓ Tại sao cần Token?</h3>
-            <p style="color:var(--muted);line-height:1.7;font-size:13px">
-                Token Discord là <strong>"chìa khóa"</strong> để gọi API thay mặt bạn.<br><br>
-                Bot không thể đổi HypeSquad vì Discord chặn IP máy chủ.<br>
-                Web tool gọi API <strong>từ chính trình duyệt của bạn</strong> → không bị chặn.<br><br>
-                <strong>Token không gửi đi đâu</strong>, chỉ lưu trong localStorage máy bạn.
-            </p>
-        </div>
-    </div>
+    try {
+        const res = await fetch('https://discord.com/api/v9/hypesquad/online', {
+            method: 'POST',
+            headers: { 'Authorization': token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ house_id: house })
+        });
 
-    <script src="js/app.js"></script>
+        if (res.status === 204) {
+            showMsg(mainMsg, 'ok', '✅ Thành công! Refresh Discord (Ctrl+R)');
+        } else if (res.status === 401) {
+            showMsg(mainMsg, 'err', '❌ Token hết hạn - Đăng xuất rồi đăng nhập lại');
+        } else if (res.status === 403) {
+            showMsg(mainMsg, 'err', '❌ Bị chặn (403) - Đổi mạng/VPN');
+        } else {
+            showMsg(mainMsg, 'err', '❌ Lỗi ' + res.status);
+        }
+    } catch (e) {
+        showMsg(mainMsg, 'err', '❌ Lỗi: ' + e.message);
+    }
+
+    btn.disabled = false; btn.textContent = '⚡ ĐỔI HUY HIỆU';
+});
+
+// ========== LEAVE ==========
+document.getElementById('btnLeave').addEventListener('click', async function() {
+    if (!confirm('Rời HypeSquad?')) return;
+    const btn = this;
+    btn.disabled = true; btn.textContent = '⏳...';
+    mainMsg.className = 'msg';
+
+    try {
+        const res = await fetch('https://discord.com/api/v9/hypesquad/online', {
+            method: 'DELETE',
+            headers: { 'Authorization': token }
+        });
+        showMsg(mainMsg, res.status === 204 ? 'ok' : 'err', res.status === 204 ? '✅ Đã rời!' : '❌ Lỗi ' + res.status);
+    } catch (e) {
+        showMsg(mainMsg, 'err', '❌ ' + e.message);
+    }
+
+    btn.disabled = false; btn.textContent = '🚫 Rời HypeSquad';
+});
+
+// ========== LOGOUT ==========
+document.getElementById('btnLogout').addEventListener('click', function() {
+    localStorage.removeItem('hs_token');
+    token = ''; userData = null; house = null;
+    loginScreen.classList.remove('hidden');
+    mainScreen.classList.add('hidden');
+    tokenInput.value = '';
+    loginMsg.className = 'msg';
+});
+
+// ========== ENTER KEY ==========
+tokenInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('btnLogin').click();
+});
+
+function showMsg(el, type, text) {
+    el.className = 'msg ' + type;
+    el.textContent = text;
+}
+</script>
+
 </body>
 </html>
