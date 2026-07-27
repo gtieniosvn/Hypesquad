@@ -193,4 +193,13 @@ details p { margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 
 .modal-close { position: absolute; top: 12px; right: 12px; background: var(--card2); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
 .step { font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
 .step strong { color: var(--text); }
-.code-block {
+.code-block { background: #0b0e13; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 11px; font-family: 'SF Mono', 'Consolas', monospace; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 8px 0; color: #4ade80; }
+kbd { background: var(--card2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 11px; font-family: 'SF Mono', monospace; }
+
+/* Responsive */
+@media (max-width: 480px) {
+    .house-grid { grid-template-columns: 1fr; }
+    .account-grid { grid-template-columns: 1fr; }
+    .tab-btn { font-size: 11px; padding: 8px 6px; }
+    .login-card { padding: 24px 16px; }
+}
