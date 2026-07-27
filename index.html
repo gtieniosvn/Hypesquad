@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>HypeSquad Pro - TienDay Developer</title>
+    <meta name="description" content="Công cụ đổi HypeSquad Discord chuyên nghiệp. Kiểm tra tài khoản, đánh giá rủi ro ban. By TienDay Developer.">
+    <meta name="keywords" content="hypesquad, discord, bravery, brilliance, balance, check account, ban risk, tienday">
+    <meta name="author" content="TienDay Developer">
+    <meta name="theme-color" content="#5865f2">
+    
+    <meta property="og:title" content="HypeSquad Pro - TienDay Developer">
+    <meta property="og:description" content="Đổi HypeSquad + Check tài khoản + Đánh giá rủi ro ban. Chuyên nghiệp, an toàn.">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%235865f2' width='100' height='100' rx='22'/><text y='.72em' font-size='65' text-anchor='middle' x='50' fill='white'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ========== SCREEN 1: NHẬP TOKEN ========== -->
+    <div class="screen" id="screenLogin">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                </div>
+                <h1>HypeSquad Pro</h1>
+                <p class="login-subtitle">Nhập Token Discord để bắt đầu</p>
+                
+                <div class="input-group">
+                    <label class="input-label">🔑 Token Discord</label>
+                    <div class="input-wrapper">
+                        <input type="password" class="token-input" id="tokenInput" placeholder="Dán token Discord..." autocomplete="off">
+                        <button class="toggle-vis" id="btnToggleVis">👁️</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" id="btnLogin">
+                    <span class="btn-text">🔓 MỞ KHÓA</span>
+                    <span class="spinner"></span>
+                </button>
+
+                <div class="result" id="loginResult"></div>
+
+                <div class="login-footer">
+                    <span class="link" id="btnGuide">📖 Cách lấy token</span>
+                    <span class="link" id="btnWhy">❓ Tại sao cần token?</span>
+                </div>
+            </div>
+
+            <p class="login-brand">By <strong>TienDay Developer</strong> · <a href="https://tienday.kdns.fr" target="_blank">tienday.kdns.fr</a></p>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN 2: DASHBOARD ========== -->
+    <div class="screen hidden" id="screenDashboard">
+        <div class="dashboard">
+            
+            <!-- Header -->
+            <header class="dash-header">
+                <div class="dash-user" id="dashUser">
+                    <img class="dash-avatar" id="dashAvatar" src="" alt="Avatar">
+                    <div>
+                        <div class="dash-username" id="dashUsername">...</div>
+                        <div class="dash-badge" id="dashBadge">Đang kiểm tra...</div>
+                    </div>
+                </div>
+                <div class="dash-actions">
+                    <button class="btn-icon" id="btnRefresh" title="Làm mới">🔄</button>
+                    <button class="btn-icon" id="btnLogout" title="Đăng xuất">🚪</button>
+                </div>
+            </header>
+
+            <!-- Risk Banner -->
+            <div class="risk-banner" id="riskBanner">
+                <div class="risk-icon" id="riskIcon">🟢</div>
+                <div class="risk-info">
+                    <div class="risk-level" id="riskLevel">An toàn</div>
+                    <div class="risk-desc" id="riskDesc">Tài khoản của bạn có thể sử dụng tool an toàn</div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="hypesquad">🏠 Đổi HypeSquad</button>
+                <button class="tab-btn" data-tab="account">🔍 Thông tin TK</button>
+                <button class="tab-btn" data-tab="safety">🛡️ An toàn</button>
+            </nav>
+
+            <!-- Tab: HypeSquad -->
+            <div class="tab-content active" id="tabHypesquad">
+                <div class="card">
+                    <h3>Chọn HypeSquad House</h3>
+                    <p class="text-muted">Chọn 1 trong 3 house để đổi huy hiệu</p>
+                    
+                    <div class="house-grid" id="houseGrid">
+                        <div class="house-card bravery" data-house="1">
+                            <div class="house-check">✓</div>
+                            <div class="house-icon bravery">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2 6 14h7l-1 8 8-12h-7l1-8Z"/></svg>
+                            </div>
+                            <div class="house-name">Bravery</div>
+                            <div class="house-desc">Dũng Cảm · Tím</div>
+                        </div>
+                        <div class="house-card brilliance" data-house="2">
+                            <div class="house-check">✓</div>
+                            <div class="house-icon brilliance">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+                            </div>
+                            <div class="house-name">Brilliance</div>
+                            <div class="house-desc">Tỏa Sáng · Cam</div>
+                        </div>
+                        <div class="house-card balance" data-house="3">
+                            <div class="house-check">✓</div>
+                            <div class="house-icon balance">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <div class="house-name">Balance</div>
+                            <div class="house-desc">Cân Bằng · Xanh</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" id="btnJoin">
+                        <span class="btn-text">⚡ ĐỔI HUY HIỆU NGAY</span>
+                        <span class="spinner"></span>
+                    </button>
+                    <button class="btn btn-danger" id="btnLeave">
+                        <span class="btn-text">🚫 Rời HypeSquad</span>
+                        <span class="spinner"></span>
+                    </button>
+
+                    <div class="result" id="hypeResult"></div>
+                </div>
+            </div>
+
+            <!-- Tab: Account Info -->
+            <div class="tab-content" id="tabAccount">
+                <div class="card">
+                    <h3>🔍 Thông tin tài khoản</h3>
+                    <div class="account-grid" id="accountInfo">
+                        <div class="acc-item"><span>🆔 ID</span><span id="accId">-</span></div>
+                        <div class="acc-item"><span>👤 Username</span><span id="accUsername">-</span></div>
+                        <div class="acc-item"><span>🌐 Global Name</span><span id="accGlobalName">-</span></div>
+                        <div class="acc-item"><span>📧 Email</span><span id="accEmail">-</span></div>
+                        <div class="acc-item"><span>📱 Phone</span><span id="accPhone">-</span></div>
+                        <div class="acc-item"><span>✅ Verified</span><span id="accVerified">-</span></div>
+                        <div class="acc-item"><span>💎 Nitro</span><span id="accNitro">-</span></div>
+                        <div class="acc-item"><span>🏠 HypeSquad</span><span id="accHype">-</span></div>
+                        <div class="acc-item"><span>🌍 Locale</span><span id="accLocale">-</span></div>
+                        <div class="acc-item"><span>📅 Ngày tạo</span><span id="accCreated">-</span></div>
+                        <div class="acc-item"><span>🚩 Flags</span><span id="accFlags">-</span></div>
+                        <div class="acc-item"><span>🏷️ Clan</span><span id="accClan">-</span></div>
+                    </div>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="card">
+                    <h3>📊 Đánh giá rủi ro</h3>
+                    <div class="risk-detail" id="riskDetail">
+                        <div class="risk-score" id="riskScore">0</div>
+                        <div class="risk-bar">
+                            <div class="risk-fill" id="riskFill"></div>
+                        </div>
+                        <div class="risk-factors" id="riskFactors"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Safety -->
+            <div class="tab-content" id="tabSafety">
+                <div class="card">
+                    <h3>🛡️ Hướng dẫn an toàn</h3>
+                    <div class="safety-list">
+                        <div class="safety-item">✅ Token KHÔNG gửi đi đâu - 100% client-side</div>
+                        <div class="safety-item">✅ Gọi thẳng API Discord - không qua server trung gian</div>
+                        <div class="safety-item">⚠️ Không spam đổi house - tối đa 1-2 lần/ngày</div>
+                        <div class="safety-item">⚠️ Không dùng token của người khác</div>
+                        <div class="safety-item">🚫 Tuyệt đối không share token</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Mức độ rủi ro khi đổi HypeSquad</h3>
+                    <div class="risk-table">
+                        <div class="risk-row low"><span>🟢 Thấp</span><span>TK > 1 năm, có email, đổi 1 lần/ngày</span></div>
+                        <div class="risk-row medium"><span>🟡 Trung bình</span><span>TK 6-12 tháng, đổi 3-5 lần/ngày</span></div>
+                        <div class="risk-row high"><span>🟠 Cao</span><span>TK < 6 tháng, không email</span></div>
+                        <div class="risk-row critical"><span>🔴 Nghiêm trọng</span><span>TK mới, spam API, token lạ → CÓ THỂ BỊ BAN</span></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>❓ FAQ</h3>
+                    <details>
+                        <summary>Có bị Discord ban không?</summary>
+                        <p>Nếu dùng đúng cách (1-2 lần/ngày, token chính chủ) → <strong>KHÔNG</strong>. Spam hoặc dùng token lạ → CÓ THỂ.</p>
+                    </details>
+                    <details>
+                        <summary>Token có bị lộ không?</summary>
+                        <p><strong>KHÔNG.</strong> Token chỉ lưu trong localStorage máy bạn, gọi thẳng API Discord.</p>
+                    </details>
+                    <details>
+                        <summary>Đổi xong bao lâu thấy huy hiệu?</summary>
+                        <p>Ngay lập tức. Refresh Discord (Ctrl+R) là thấy.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dash-footer">
+                <p><strong>TienDay Developer</strong> · <a href="https://tienday.kdns.fr">tienday.kdns.fr</a></p>
+                <p>100% Client-side · Không theo dõi · Không lưu trữ</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Guide Modal -->
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal">
+            <button class="modal-close" onclick="App.closeModal('guideModal')">✕</button>
+            <h3>📖 Cách lấy Token Discord</h3>
+            <div class="step"><strong>1.</strong> Mở <a href="https://discord.com/channels/@me" target="_blank">Discord Web</a> → Đăng nhập</div>
+            <div class="step"><strong>2.</strong> Nhấn <kbd>F12</kbd> → Tab <strong>Console</strong></div>
+            <div class="step"><strong>3.</strong> Dán code → Enter:</div>
+            <pre class="code-block" id="tokenCode">(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()</pre>
+            <button class="btn btn-primary btn-sm" id="btnCopyCode">📋 Copy Code</button>
+            <p style="color:#f87171;font-size:12px;margin-top:8px">⚠️ Token = Mật khẩu. Không share!</p>
+        </div>
+    </div>
+
+    <!-- Why Modal -->
+    <div class="modal-overlay" id="whyModal">
+        <div class="modal">
+            <button class="modal-close" onclick="App.closeModal('whyModal')">✕</button>
+            <h3>❓ Tại sao cần Token?</h3>
+            <p style="color:var(--muted);line-height:1.7;font-size:13px">
+                Token Discord là <strong>"chìa khóa"</strong> để gọi API thay mặt bạn.<br><br>
+                Bot không thể đổi HypeSquad vì Discord chặn IP máy chủ.<br>
+                Web tool gọi API <strong>từ chính trình duyệt của bạn</strong> → không bị chặn.<br><br>
+                <strong>Token không gửi đi đâu</strong>, chỉ lưu trong localStorage máy bạn.
+            </p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
