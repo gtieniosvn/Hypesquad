@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO -->
+    <title>HypeSquad Switcher - TienDay Developer</title>
+    <meta name="description" content="Đổi huy hiệu HypeSquad Discord - Bravery, Brilliance, Balance. Miễn phí, không cần đăng nhập. By TienDay Developer.">
+    <meta name="keywords" content="hypesquad, discord, hypesquad switcher, bravery, brilliance, balance, token, tienday">
+    <meta name="author" content="TienDay Developer">
+    <meta name="theme-color" content="#5865f2">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="HypeSquad Switcher - TienDay Developer">
+    <meta property="og:description" content="Đổi huy hiệu HypeSquad Discord miễn phí. Bravery, Brilliance, Balance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tienday.kdns.fr">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%235865f2' width='100' height='100' rx='22'/><text y='.72em' font-size='65' text-anchor='middle' x='50' fill='white'>⚡</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%235865f2' width='100' height='100' rx='22'/><text y='.72em' font-size='65' text-anchor='middle' x='50' fill='white'>⚡</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 2 7l10 5 10-5-10-5Z"/>
+                    <path d="m2 17 10 5 10-5"/>
+                    <path d="m2 12 10 5 10-5"/>
+                </svg>
+            </div>
+            <h1>HypeSquad Switcher</h1>
+            <p class="brand">By <a href="https://tienday.kdns.fr" target="_blank" rel="noopener">TienDay Developer</a></p>
+        </header>
+
+        <!-- Alert -->
+        <div class="alert">
+            <span class="alert-icon">🔒</span>
+            <div class="alert-text">
+                <strong>Token = Mật khẩu!</strong> Token chỉ chạy trên máy bạn, <strong>không gửi đi đâu</strong>. Gọi thẳng API Discord.
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            
+            <!-- Token Input -->
+            <div class="input-group">
+                <label class="input-label">
+                    🔑 Token Discord
+                    <span class="link" id="btnGuide">📖 Cách lấy</span>
+                </label>
+                <div class="input-wrapper">
+                    <input 
+                        type="password" 
+                        class="token-input" 
+                        id="tokenInput" 
+                        placeholder="Dán token Discord vào đây..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="toggle-vis" id="btnToggleVis" title="Hiện/ẩn token">👁️</button>
+                </div>
+            </div>
+
+            <!-- House Selection -->
+            <div class="input-group">
+                <label class="input-label">🏠 Chọn HypeSquad House</label>
+                <div class="house-grid" id="houseGrid">
+                    <!-- Bravery -->
+                    <div class="house-card bravery" data-house="1">
+                        <div class="house-check">✓</div>
+                        <div class="house-icon bravery">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2 6 14h7l-1 8 8-12h-7l1-8Z"/>
+                            </svg>
+                        </div>
+                        <div class="house-name">Bravery</div>
+                        <div class="house-desc">Dũng Cảm</div>
+                    </div>
+
+                    <!-- Brilliance -->
+                    <div class="house-card brilliance" data-house="2">
+                        <div class="house-check">✓</div>
+                        <div class="house-icon brilliance">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
+                            </svg>
+                        </div>
+                        <div class="house-name">Brilliance</div>
+                        <div class="house-desc">Tỏa Sáng</div>
+                    </div>
+
+                    <!-- Balance -->
+                    <div class="house-card balance" data-house="3">
+                        <div class="house-check">✓</div>
+                        <div class="house-icon balance">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="house-name">Balance</div>
+                        <div class="house-desc">Cân Bằng</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <button class="btn btn-primary" id="btnJoin">
+                <span class="btn-text">⚡ ĐỔI HUY HIỆU NGAY</span>
+                <span class="spinner"></span>
+            </button>
+
+            <button class="btn btn-danger" id="btnLeave">
+                <span class="btn-text">🚫 Rời HypeSquad</span>
+                <span class="spinner"></span>
+            </button>
+
+            <!-- Result -->
+            <div class="result" id="result"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>TienDay Developer</strong> · <a href="https://tienday.kdns.fr">tienday.kdns.fr</a></p>
+            <p>100% Client-side · Token không rời máy bạn · Không theo dõi · Không lưu trữ</p>
+        </footer>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Guide Modal -->
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal">
+            <button class="modal-close" id="btnCloseModal">✕</button>
+            <h3>📖 Cách lấy Token Discord</h3>
+            
+            <div class="step">
+                <strong>Bước 1:</strong> Mở <a href="https://discord.com/channels/@me" target="_blank" rel="noopener">Discord Web</a> → Đăng nhập
+            </div>
+            
+            <div class="step">
+                <strong>Bước 2:</strong> Nhấn <kbd>F12</kbd> → Chọn tab <strong>Console</strong>
+            </div>
+            
+            <div class="step">
+                <strong>Bước 3:</strong> Dán code này → <strong>Enter</strong>:
+            </div>
+            
+            <pre class="code-block" id="tokenCode">(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()</pre>
+            
+            <button class="btn btn-primary btn-sm" id="btnCopyCode">📋 Copy Code</button>
+            
+            <div class="step" style="color:#f87171;margin-top:8px">
+                ⚠️ <strong>Token = Mật khẩu tài khoản!</strong> Không chia sẻ cho bất kỳ ai.
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="js/app.js"></script>
+</body>
+</html>
