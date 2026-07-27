@@ -11,7 +11,6 @@
             --muted: #8892a6; --border: #1e2433; --blurple: #5865f2;
             --bravery: #9c84ef; --brilliance: #f47b67; --balance: #3ecf8e;
             --success: #22c55e; --danger: #ef4444; --warning: #f59e0b;
-            --radius: 16px; --radius-sm: 10px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -23,17 +22,15 @@
                               radial-gradient(ellipse 50% 40% at 0% 10%, rgba(156,132,239,.08), transparent),
                               radial-gradient(ellipse 50% 40% at 100% 10%, rgba(62,207,142,.06), transparent);
         }
-        .app { width: 100%; max-width: 480px; }
+        .app { width: 100%; max-width: 500px; }
 
-        /* ========== SCREEN ========== */
-        .screen { display: none; animation: fadeSlideIn .4s cubic-bezier(.16,1,.3,1); }
+        .screen { display: none; animation: fadeIn .35s ease; }
         .screen.active { display: block; }
-        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ========== CARD ========== */
         .card {
             background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 28px 24px;
+            border-radius: 18px; padding: 26px 22px;
             backdrop-filter: blur(20px); position: relative; overflow: hidden;
         }
         .card::before {
@@ -41,7 +38,7 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
         }
 
-        /* ========== LOGIN ========== */
+        /* LOGIN */
         .login-header { text-align: center; margin-bottom: 24px; }
         .login-icon {
             width: 56px; height: 56px; margin: 0 auto 14px;
@@ -50,17 +47,14 @@
             box-shadow: 0 12px 32px rgba(88,101,242,.35);
         }
         .login-icon svg { width: 26px; height: 26px; }
-        .login-title { font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 4px; }
-        .login-sub { font-size: 13px; color: var(--muted); }
+        .login-title { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+        .login-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
         .input-wrapper { position: relative; margin-bottom: 14px; }
-        .input-label {
-            display: block; font-size: 10px; font-weight: 700; color: var(--muted);
-            text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
-        }
+        .input-label { display: block; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
         .token-input {
             width: 100%; padding: 14px 48px 14px 16px; background: var(--card2);
-            border: 2px solid var(--border); border-radius: var(--radius-sm);
+            border: 2px solid var(--border); border-radius: 12px;
             color: var(--text); font-size: 13px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
             outline: none; transition: all .2s;
         }
@@ -71,13 +65,12 @@
             border-radius: 8px; transition: all .15s;
         }
         .toggle-vis:hover { background: var(--border); color: #fff; }
-        .toggle-vis:active { transform: scale(.9); }
 
         .btn {
-            width: 100%; padding: 15px 20px; border: none; border-radius: var(--radius-sm);
+            width: 100%; padding: 15px 20px; border: none; border-radius: 12px;
             font-weight: 700; font-size: 14px; cursor: pointer; transition: all .2s;
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            color: #fff; letter-spacing: .01em; position: relative; overflow: hidden;
+            color: #fff; letter-spacing: .01em; position: relative;
         }
         .btn:active { transform: scale(.98); }
         .btn:disabled { opacity: .5; pointer-events: none; }
@@ -85,9 +78,7 @@
         .btn-primary:hover:not(:disabled) { box-shadow: 0 8px 28px rgba(88,101,242,.35); transform: translateY(-1px); }
         .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
         .btn-danger:hover:not(:disabled) { box-shadow: 0 8px 28px rgba(239,68,68,.3); }
-        .btn-outline {
-            background: transparent; border: 1.5px solid var(--border); color: var(--text);
-        }
+        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
         .btn-outline:hover { border-color: var(--muted); background: var(--card2); }
         .btn-sm { width: auto; padding: 9px 18px; font-size: 12px; border-radius: 8px; }
 
@@ -100,42 +91,36 @@
         .btn.loading .spinner { display: block; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ========== MESSAGE ========== */
         .msg {
-            margin-top: 12px; padding: 12px 14px; border-radius: var(--radius-sm);
+            margin-top: 12px; padding: 12px 14px; border-radius: 12px;
             font-size: 12px; font-weight: 600; display: none; align-items: center; gap: 8px;
         }
-        .msg.show { display: flex; animation: fadeSlideIn .25s ease; }
+        .msg.show { display: flex; animation: fadeIn .25s ease; }
         .msg.success { background: rgba(34,197,94,.1); color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
         .msg.error { background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
         .msg-icon { font-size: 16px; flex-shrink: 0; }
 
-        /* ========== DASHBOARD ========== */
-        .dash-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 20px; gap: 12px;
-        }
+        /* DASHBOARD */
+        .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; }
         .dash-user { display: flex; align-items: center; gap: 12px; min-width: 0; }
         .dash-avatar {
             width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border);
             object-fit: cover; flex-shrink: 0; background: var(--card2);
         }
-        .dash-info { min-width: 0; }
         .dash-name { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .dash-badge { font-size: 11px; color: var(--muted); margin-top: 2px; }
-        .dash-actions { display: flex; gap: 6px; flex-shrink: 0; }
-        .icon-btn {
-            width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
-            background: var(--card2); color: var(--muted); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 16px;
-            transition: all .15s;
+
+        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px; }
+        .stat-card {
+            background: var(--card2); border: 1px solid var(--border); border-radius: 12px;
+            padding: 14px 10px; text-align: center;
         }
-        .icon-btn:hover { background: var(--border); color: #fff; }
-        .icon-btn:active { transform: scale(.92); }
+        .stat-value { font-size: 18px; font-weight: 800; }
+        .stat-label { font-size: 10px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .05em; }
 
         .risk-banner {
             display: flex; align-items: center; gap: 12px; padding: 14px 16px;
-            border-radius: var(--radius-sm); margin-bottom: 18px;
+            border-radius: 12px; margin-bottom: 18px;
         }
         .risk-banner.safe { background: rgba(34,197,94,.06); border: 1px solid rgba(34,197,94,.15); }
         .risk-banner.warn { background: rgba(245,158,11,.06); border: 1px solid rgba(245,158,11,.15); }
@@ -144,11 +129,14 @@
         .risk-text { font-size: 12px; line-height: 1.5; }
         .risk-text strong { font-size: 14px; display: block; margin-bottom: 2px; }
 
-        .house-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .section-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+        .section-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+
+        .house-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
         .house-card {
             background: var(--card2); border: 2px solid var(--border); border-radius: 14px;
             padding: 18px 8px; text-align: center; cursor: pointer; transition: all .2s;
-            position: relative;
+            position: relative; user-select: none;
         }
         .house-card:hover { border-color: var(--muted); transform: translateY(-2px); }
         .house-card.selected { border-color: var(--blurple); }
@@ -157,9 +145,8 @@
         .house-card.selected.balance { border-color: var(--balance); box-shadow: 0 0 0 4px rgba(62,207,142,.12); }
         .house-icon {
             width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto 10px; transition: transform .2s;
+            justify-content: center; margin: 0 auto 10px;
         }
-        .house-card:hover .house-icon { transform: scale(1.05); }
         .house-icon.bravery { background: linear-gradient(135deg, #9c84ef, #5865f2); }
         .house-icon.brilliance { background: linear-gradient(135deg, #f59e0b, #f47b67); }
         .house-icon.balance { background: linear-gradient(135deg, #3ecf8e, #0ea5e9); }
@@ -168,20 +155,17 @@
         .house-check {
             position: absolute; top: 8px; right: 8px; width: 20px; height: 20px;
             border-radius: 50%; background: var(--blurple); color: #fff;
-            font-size: 10px; display: none; align-items: center; justify-content: center;
+            font-size: 10px; display: none; align-items: center; justify-content: center; font-weight: 700;
         }
         .house-card.selected .house-check { display: flex; }
 
-        .section-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-        .section-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
-
         .footer { text-align: center; margin-top: 16px; font-size: 11px; color: var(--muted); }
         .footer a { color: var(--blurple); text-decoration: none; font-weight: 600; }
-        .footer a:hover { text-decoration: underline; }
 
         @media (max-width: 420px) {
             .house-grid { grid-template-columns: 1fr; }
-            .card { padding: 20px 16px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .card { padding: 20px 14px; }
         }
     </style>
 </head>
@@ -189,14 +173,12 @@
 
 <div class="app">
     
-    <!-- ==================== LOGIN SCREEN ==================== -->
+    <!-- ========== LOGIN SCREEN ========== -->
     <div class="screen active" id="loginScreen">
         <div class="card">
             <div class="login-header">
                 <div class="login-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
                 </div>
                 <div class="login-title">HypeSquad Pro</div>
                 <div class="login-sub">Nhập Token Discord để tiếp tục</div>
@@ -216,26 +198,40 @@
             <div class="msg" id="loginMsg"><span class="msg-icon"></span><span class="msg-text"></span></div>
 
             <div style="text-align:center;margin-top:14px">
-                <span class="btn btn-outline btn-sm" id="btnGuide" style="display:inline-flex;font-weight:500">📖 Cách lấy token</span>
+                <button class="btn btn-outline btn-sm" id="btnGuide" style="font-weight:500">📖 Cách lấy token</button>
             </div>
         </div>
         <div class="footer">By <a href="https://tienday.kdns.fr" target="_blank">TienDay Developer</a></div>
     </div>
 
-    <!-- ==================== DASHBOARD SCREEN ==================== -->
+    <!-- ========== DASHBOARD SCREEN ========== -->
     <div class="screen" id="mainScreen">
         <div class="card">
-            <!-- Header -->
+            <!-- User Header -->
             <div class="dash-header">
                 <div class="dash-user">
                     <img class="dash-avatar" id="userAvatar" src="" alt="Avatar">
-                    <div class="dash-info">
+                    <div>
                         <div class="dash-name" id="userName">...</div>
                         <div class="dash-badge" id="userBadge">...</div>
                     </div>
                 </div>
-                <div class="dash-actions">
-                    <button class="icon-btn" id="btnLogout" title="Đăng xuất">🚪</button>
+                <button class="btn btn-outline btn-sm" id="btnLogout" style="font-weight:500">🚪 Thoát</button>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statHype" style="color:var(--muted)">-</div>
+                    <div class="stat-label">HypeSquad</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statNitro" style="color:var(--muted)">-</div>
+                    <div class="stat-label">Nitro</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statRisk">-</div>
+                    <div class="stat-label">Rủi ro</div>
                 </div>
             </div>
 
@@ -244,16 +240,17 @@
                 <div class="risk-dot" id="riskIcon">🟢</div>
                 <div class="risk-text">
                     <strong id="riskTitle">An toàn</strong>
-                    <span id="riskDesc">Tài khoản ổn định, có thể sử dụng tool</span>
+                    <span id="riskDesc">Tài khoản ổn định</span>
                 </div>
             </div>
 
             <!-- House Selection -->
             <div class="section-title">🏠 Chọn HypeSquad House</div>
-            <div class="section-sub">Chọn 1 trong 3 house để đổi huy hiệu</div>
+            <div class="section-sub">Chọn 1 house để đổi huy hiệu</div>
 
             <div class="house-grid" id="houseGrid">
-                <div class="house-card bravery" data-house="1" onclick="selectHouse(1,this)">
+                <!-- Bravery -->
+                <div class="house-card bravery" data-house="1">
                     <div class="house-check">✓</div>
                     <div class="house-icon bravery">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2 6 14h7l-1 8 8-12h-7l1-8Z"/></svg>
@@ -261,7 +258,8 @@
                     <div class="house-name">Bravery</div>
                     <div class="house-desc">Dũng Cảm · Tím</div>
                 </div>
-                <div class="house-card brilliance" data-house="2" onclick="selectHouse(2,this)">
+                <!-- Brilliance -->
+                <div class="house-card brilliance" data-house="2">
                     <div class="house-check">✓</div>
                     <div class="house-icon brilliance">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
@@ -269,7 +267,8 @@
                     <div class="house-name">Brilliance</div>
                     <div class="house-desc">Tỏa Sáng · Cam</div>
                 </div>
-                <div class="house-card balance" data-house="3" onclick="selectHouse(3,this)">
+                <!-- Balance -->
+                <div class="house-card balance" data-house="3">
                     <div class="house-check">✓</div>
                     <div class="house-icon balance">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -302,6 +301,7 @@
 const $ = id => document.getElementById(id);
 const API = 'https://discord.com/api/v9';
 const HOUSES = {1:'Bravery',2:'Brilliance',3:'Balance'};
+const HOUSE_COLORS = {1:'#9c84ef',2:'#f47b67',3:'#3ecf8e'};
 
 let token = localStorage.getItem('hspro_token') || '';
 let user = null;
@@ -326,7 +326,7 @@ $('toggleVis').addEventListener('click', function(){
 
 // ========== GUIDE ==========
 $('btnGuide').addEventListener('click', function(){
-    alert('📖 Cách lấy Token Discord:\n\n1. Mở Discord Web → F12\n2. Tab Console → Dán code:\n\n(webpackChunkdiscord_app.push([[\"\"],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()\n\n3. Copy token → Dán vào đây');
+    alert('📖 Cách lấy Token Discord:\n\n1. Mở Discord Web → F12\n2. Tab Console → Dán code:\n\n(webpackChunkdiscord_app.push([[""],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()\n\n3. Enter → Copy token → Dán vào ô trên');
 });
 
 // ========== LOGIN ==========
@@ -347,9 +347,9 @@ $('btnLogin').addEventListener('click', async function(){
             localStorage.setItem('hspro_token', token);
             showDashboard();
         } else if (res.status === 401) {
-            showMsg(loginMsg, 'error', 'Token không hợp lệ hoặc hết hạn');
+            showMsg(loginMsg, 'error', 'Token sai hoặc hết hạn. Lấy token mới!');
         } else {
-            showMsg(loginMsg, 'error', 'Lỗi ' + res.status + ' - Thử lại');
+            showMsg(loginMsg, 'error', 'Lỗi ' + res.status);
         }
     } catch (e) {
         showMsg(loginMsg, 'error', 'Lỗi kết nối: ' + e.message);
@@ -370,46 +370,73 @@ function showDashboard() {
         : 'https://cdn.discordapp.com/embed/avatars/0.png';
 
     // Badge
-    let badge = [];
-    if (u.premium_type === 2) badge.push('💎 Nitro Full');
-    else if (u.premium_type === 1) badge.push('💎 Nitro Classic');
-    if (u.flags & 256) badge.push('🟣 Bravery');
-    else if (u.flags & 128) badge.push('🟠 Brilliance');
-    else if (u.flags & 64) badge.push('🟢 Balance');
-    else badge.push('Chưa có HypeSquad');
-    $('userBadge').textContent = badge.join(' · ');
+    let badges = [];
+    if (u.premium_type === 2) badges.push('💎 Nitro Full');
+    else if (u.premium_type === 1) badges.push('💎 Nitro Classic');
+    if (u.flags & 256) badges.push('🟣 Bravery');
+    else if (u.flags & 128) badges.push('🟠 Brilliance');
+    else if (u.flags & 64) badges.push('🟢 Balance');
+    else badges.push('⚪ Chưa có HypeSquad');
+    $('userBadge').textContent = badges.join(' · ');
+
+    // Stats
+    const hypeStat = $('statHype');
+    const nitroStat = $('statNitro');
+    const riskStat = $('statRisk');
+
+    if (u.flags & 256) { hypeStat.textContent = '🟣'; hypeStat.style.color = '#9c84ef'; }
+    else if (u.flags & 128) { hypeStat.textContent = '🟠'; hypeStat.style.color = '#f47b67'; }
+    else if (u.flags & 64) { hypeStat.textContent = '🟢'; hypeStat.style.color = '#3ecf8e'; }
+    else { hypeStat.textContent = '⚪'; hypeStat.style.color = '#8892a6'; }
+
+    if (u.premium_type === 2) { nitroStat.textContent = '💎 Full'; nitroStat.style.color = '#f59e0b'; }
+    else if (u.premium_type === 1) { nitroStat.textContent = '💎 Classic'; nitroStat.style.color = '#a78bfa'; }
+    else { nitroStat.textContent = '❌'; nitroStat.style.color = '#8892a6'; }
 
     // Risk
     const created = new Date(Math.floor(parseInt(u.id) / 4194304) + 1420070400000);
     const months = (Date.now() - created.getTime()) / (1000*60*60*24*30);
     const banner = $('riskBanner');
-    
+
     if (months < 3) {
         banner.className = 'risk-banner danger';
         $('riskIcon').textContent = '🔴'; $('riskTitle').textContent = 'Nguy hiểm';
-        $('riskDesc').textContent = 'Tài khoản mới (<3 tháng) - Nguy cơ bị ban cao';
+        $('riskDesc').textContent = 'TK mới (<3 tháng) - Nguy cơ ban cao';
+        riskStat.textContent = '🔴'; riskStat.style.color = '#ef4444';
     } else if (months < 6 || !u.email) {
         banner.className = 'risk-banner warn';
         $('riskIcon').textContent = '🟡'; $('riskTitle').textContent = 'Thận trọng';
-        $('riskDesc').textContent = 'Tài khoản chưa đủ 6 tháng hoặc thiếu email';
+        $('riskDesc').textContent = 'TK <6 tháng hoặc thiếu email';
+        riskStat.textContent = '🟡'; riskStat.style.color = '#f59e0b';
     } else {
         banner.className = 'risk-banner safe';
         $('riskIcon').textContent = '🟢'; $('riskTitle').textContent = 'An toàn';
-        $('riskDesc').textContent = 'Tài khoản ổn định, có thể dùng tool';
+        $('riskDesc').textContent = 'Tài khoản ổn định';
+        riskStat.textContent = '🟢'; riskStat.style.color = '#22c55e';
     }
 }
 
-// ========== SELECT HOUSE ==========
-function selectHouse(id, el) {
-    selectedHouse = id;
-    document.querySelectorAll('.house-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-}
+// ========== SELECT HOUSE (addEventListener TRỰC TIẾP) ==========
+document.querySelectorAll('.house-card').forEach(card => {
+    card.addEventListener('click', function() {
+        selectedHouse = parseInt(this.dataset.house);
+        
+        // Remove all selected
+        document.querySelectorAll('.house-card').forEach(c => c.classList.remove('selected'));
+        
+        // Add selected
+        this.classList.add('selected');
+    });
+});
 
 // ========== JOIN ==========
 $('btnJoin').addEventListener('click', async function(){
     const btn = this;
-    if (!selectedHouse) return showMsg(mainMsg, 'error', 'Chọn House trước!');
+    
+    // ✅ FIX: Kiểm tra selectedHouse
+    if (!selectedHouse) {
+        return showMsg(mainMsg, 'error', '⚠️ Vui lòng chọn House trước khi đổi!');
+    }
 
     setLoading(btn, true);
     hideMsg(mainMsg);
@@ -426,7 +453,7 @@ $('btnJoin').addEventListener('click', async function(){
         } else if (res.status === 401) {
             showMsg(mainMsg, 'error', 'Token hết hạn - Đăng xuất & đăng nhập lại');
         } else if (res.status === 403) {
-            showMsg(mainMsg, 'error', 'Bị chặn (403) - Đổi mạng hoặc dùng VPN');
+            showMsg(mainMsg, 'error', 'Bị chặn (403) - Đổi mạng/VPN');
         } else {
             showMsg(mainMsg, 'error', 'Lỗi ' + res.status);
         }
@@ -439,7 +466,7 @@ $('btnJoin').addEventListener('click', async function(){
 
 // ========== LEAVE ==========
 $('btnLeave').addEventListener('click', async function(){
-    if (!confirm('Rời HypeSquad?')) return;
+    if (!confirm('Xác nhận rời HypeSquad?')) return;
     const btn = this;
 
     setLoading(btn, true);
@@ -450,7 +477,7 @@ $('btnLeave').addEventListener('click', async function(){
             method: 'DELETE',
             headers: { Authorization: token }
         });
-        if (res.status === 204) showMsg(mainMsg, 'success', '✅ Đã rời HypeSquad!');
+        if (res.status === 204) showMsg(mainMsg, 'success', '✅ Đã rời HypeSquad! Refresh Discord.');
         else showMsg(mainMsg, 'error', 'Lỗi ' + res.status);
     } catch (e) {
         showMsg(mainMsg, 'error', 'Lỗi: ' + e.message);
